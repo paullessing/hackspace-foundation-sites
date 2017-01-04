@@ -14,7 +14,7 @@ require_once("$root/interest.php");
 require_once("$root/calendar.php");
 require_once("$root/project.php");
 
-require_once("$root/gocardless-php/lib/GoCardless.php");
+//require_once("$root/gocardless-php/lib/GoCardless.php");
 
 $db = new fDatabase('postgresql', $DB_NAME, $DB_USER, $DB_PASSWORD);
 
@@ -23,9 +23,9 @@ fORMDatabase::attach($db);
 fSession::setLength('30 minutes', '10 weeks');
 fSession::setPath(dirname(__FILE__) . '/../var/session');
 
-if (isset($GOCARDLESS_CREDENTIALS)) {
-    GoCardless::set_account_details($GOCARDLESS_CREDENTIALS);
-}
+//if (isset($GOCARDLESS_CREDENTIALS)) {
+//    GoCardless::set_account_details($GOCARDLESS_CREDENTIALS);
+//}
 
 if ($uid = fSession::get('user')) {
     $user = new User($uid);
