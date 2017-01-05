@@ -14,12 +14,13 @@ if (empty($rawPayload)) {
 $payloadData = array();
 parse_str($rawPayload, $payloadData);
 $nonce = $payloadData['nonce'];
-if (empty($nonce)) {
-    die('Payload did not contain nonce');
+$returnUrl = $payloadData['return_sso_url'];
+if (empty($nonce) || empty($returnUrl)) {
+    die('Payload missing nonce or return url');
 }
 
 // ensure signature and payload are valid
-$expectedSig = hash_hmac('sha256', $rawPayload, $DISCOURSE_SSO_SECRET);
+$expectedSig = hash_hmac('sha256', $ssoPayload, $DISCOURSE_SSO_SECRET);
 if (strcmp($expectedSig, $ssoSignature) !== 0) {
     var_dump($rawPayload);
     var_dump($expectedSig);
@@ -61,8 +62,8 @@ var_dump($returnPayload);
 var_dump($returnSignature);
 echo '</pre>';
 
-$redirectUrl = $DISCOURSE_URL . '/session/sso_login?' . $returnParams;
+$redirectUrl = $returnUrl . '?' . $returnParams;
 
-die('Redirecting to: <code>' . $redirectUrl . '</code>');
+//die('Redirecting to: <code>' . $redirectUrl . '</code>');
 fURL::redirect($redirectUrl);
 
