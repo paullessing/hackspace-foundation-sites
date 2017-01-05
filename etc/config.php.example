@@ -17,3 +17,7 @@ $GOCARDLESS_CREDENTIALS = array(
   'merchant_id'   => 'AYVJKW90M0AR0H4T0J5M6J908QFV6M5T9ZVWXJK69YBC60GH7SYQ9SEHC07TNFJN',
   'access_token'  => '0SDNTJADVK'
 );
+
+$DISCOURSE_URL = 'http://discourse.local';
+$DISCOURSE_SSO_SECRET = "secretDiscourseKey";
+
